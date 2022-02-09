@@ -2,88 +2,256 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    products: [],
-    cart: [],
-    config: null,
-    sidebarOpen: false,
-    currentLang: "rus",
-    translations: null,
-    productsLoaded: false,
-    translationsLoaded: false,
-    configLoaded: false
-  },
-  mutations: {
-    setProducts(state, products) {
-      state.products = products
-    },
-    setTranslations(state, translations) {
-      state.translations = translations
-    },
-    setConfig(state, config) {
-      state.config = config
-    },
-    setProductsLoaded(state, value) {
-      state.productsLoaded = value
-    },
-    setTranslationsLoaded(state, value) {
-      state.translationsLoaded = value
-    },
-    setConfigLoaded(state, value) {
-      state.configLoaded = value
-    },
-    setSidebarOpen(state, value) {
-      state.sidebarOpen = value
-    },
-    setCart(state, value) {
-      state.cart = value
-    }
-  },
-  actions: {
-    fetchProducts({ commit }) {
-      fetch("products.json")
-        .then(res => res.json())
-        .then(data => commit('setProducts', data))
-        .then(() => {
-          commit('setProductsLoaded', true)
-        })
-    },
-    fetchTranslations({ commit }) {
-      fetch('translations.json')
-        .then(res => res.json())
-        .then(translations => commit('setTranslations', translations))
-        .then(() => {
-          commit('setTranslationsLoaded', true)
-        })
-    },
-    fetchConfig({ commit }) {
-      fetch('config.json')
-        .then(res => res.json())
-        .then(config => commit('setConfig', config))
-        .then(() => {
-          commit('setConfigLoaded', true)
-        })
-    },
-    addToCart(context, product) {
-      const itemInCart = context.state.cart.find(prod => prod.id === product.id)
-      if (!itemInCart) {
-        const cart = [...context.state.cart]
-        cart.push(product)
-        context.commit('setCart', cart)
-      }
-    },
-    removeFromCart(context, id) {
-      const filteredCart = context.state.cart.filter(item => item.id !== id)
-      context.commit('setCart', filteredCart)
-    },
-    editConfig({ commit }, data) {
-      commit('setConfig', data)
-    }
-  },
-  getters: {
-    cartTotal(state) {
-      return state.cart.reduce((acc, product) => {
-        return acc += product.price
-      }, 0)
-    }
+    materials: [
+      {
+        name: "Фанера",
+        id: "fanera",
+        thickness: {
+          "1-6": {
+            "<500": 17,
+            "<1000": 15,
+            ">1000": 13
+          },
+          "7-12": {
+            "<500": 33,
+            "<1000": 29,
+            ">1000": 25
+          },
+          "13-18": {
+            "<500": 46,
+            "<1000": 42,
+            ">1000": 38
+          },
+          "19-24": {
+            "<500": 59,
+            "<1000": 55,
+            ">1000": 51
+          },
+          "25-30": {
+            "<500": 74,
+            "<1000": 69,
+            ">1000": 64
+          },
+          "31-36": {
+            "<500": 86,
+            "<1000": 81,
+            ">1000": 76
+          },
+          "37-40": {
+            "<500": 99,
+            "<1000": 94,
+            ">1000": 89
+          },
+        }
+      },
+      {
+        name: "МДФ",
+        id: "mdf",
+        thickness: {
+          "1-6": {
+            "<500": 17,
+            "<1000": 15,
+            ">1000": 13
+          },
+          "7-12": {
+            "<500": 33,
+            "<1000": 29,
+            ">1000": 25
+          },
+          "13-18": {
+            "<500": 46,
+            "<1000": 42,
+            ">1000": 38
+          },
+          "19-24": {
+            "<500": 59,
+            "<1000": 55,
+            ">1000": 51
+          },
+          "25-30": {
+            "<500": 74,
+            "<1000": 69,
+            ">1000": 64
+          },
+          "31-36": {
+            "<500": 86,
+            "<1000": 81,
+            ">1000": 76
+          },
+          "37-40": {
+            "<500": 99,
+            "<1000": 94,
+            ">1000": 89
+          },
+        }
+      },
+      {
+        name: "ДСП",
+        id: "dsp",
+        thickness: {
+          "1-6": {
+            "<500": 17,
+            "<1000": 15,
+            ">1000": 13
+          },
+          "7-12": {
+            "<500": 33,
+            "<1000": 29,
+            ">1000": 25
+          },
+          "13-18": {
+            "<500": 46,
+            "<1000": 42,
+            ">1000": 38
+          },
+          "19-24": {
+            "<500": 59,
+            "<1000": 55,
+            ">1000": 51
+          },
+          "25-30": {
+            "<500": 74,
+            "<1000": 69,
+            ">1000": 64
+          },
+          "31-36": {
+            "<500": 86,
+            "<1000": 81,
+            ">1000": 76
+          },
+          "37-40": {
+            "<500": 99,
+            "<1000": 94,
+            ">1000": 89
+          },
+        }
+      },
+      {
+        name: "Дерево",
+        id: "derevo",
+        thickness: {
+          "1-6": {
+            "<500": 17,
+            "<1000": 15,
+            ">1000": 13
+          },
+          "7-12": {
+            "<500": 33,
+            "<1000": 29,
+            ">1000": 25
+          },
+          "13-18": {
+            "<500": 46,
+            "<1000": 42,
+            ">1000": 38
+          },
+          "19-24": {
+            "<500": 59,
+            "<1000": 55,
+            ">1000": 51
+          },
+          "25-30": {
+            "<500": 74,
+            "<1000": 69,
+            ">1000": 64
+          },
+          "31-36": {
+            "<500": 86,
+            "<1000": 81,
+            ">1000": 76
+          },
+          "37-40": {
+            "<500": 99,
+            "<1000": 94,
+            ">1000": 89
+          },
+        }
+      },
+      {
+        name: "Акрил",
+        id: "akril",
+        thickness: {
+          "2-4": {
+            "<500": 17,
+            "<1000": 15,
+            ">1000": 13
+          },
+          "5-8": {
+            "<500": 33,
+            "<1000": 29,
+            ">1000": 25
+          },
+          "10": {
+            "<500": 46,
+            "<1000": 42,
+            ">1000": 38
+          },
+          "12-15": {
+            "<500": 61,
+            "<1000": 56,
+            ">1000": 51
+          },
+        }
+      },
+      {
+        name: "Композит",
+        id: "compozit",
+        thickness: {
+          "3-4": {
+            "<500": 17,
+            "<1000": 15,
+            ">1000": 13
+          }
+        }
+      },
+      {
+        name: "ПВХ",
+        id: "pvh",
+        thickness: {
+          "0,5-6": {
+            "<500": 17,
+            "<1000": 15,
+            ">1000": 13
+          },
+          "7-12": {
+            "<500": 33,
+            "<1000": 29,
+            ">1000": 25
+          }
+        }
+      },
+      {
+        name: "Полистирол",
+        id: "polistirol",
+        thickness: {
+          "1-2": {
+            "<500": 17,
+            "<1000": 15,
+            ">1000": 13
+          },
+          "3-4": {
+            "<500": 33,
+            "<1000": 29,
+            ">1000": 25
+          }
+        }
+      },
+      {
+        name: "ПЭТ",
+        id: "pet",
+        thickness: {
+          "1-2": {
+            "<500": 17,
+            "<1000": 15,
+            ">1000": 13
+          },
+          "3-4": {
+            "<500": 33,
+            "<1000": 29,
+            ">1000": 25
+          }
+        }
+      },
+    ],
   },
 });

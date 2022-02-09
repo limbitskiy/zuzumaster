@@ -1,9 +1,11 @@
 import TheBtn from "@/components/UI/TheBtn"
-import Hamburger from "@/components/UI/Hamburger"
-import Form from "@/components/UI/Form"
+import TheInput from "@/components/UI/TheInput"
+import TheSelectMain from "@/components/UI/TheSelectMain"
+import TheSelectSub from "@/components/UI/TheSelectSub"
 
 export default [
     TheBtn,
-    Hamburger,
-    Form
+    TheInput,
+    TheSelectMain,
+    TheSelectSub
 ]

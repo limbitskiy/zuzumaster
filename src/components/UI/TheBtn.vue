@@ -1,40 +1,49 @@
 <script>
 export default {
   name: "TheBtn",
+  props: {
+    color: {
+      required: true,
+    },
+    href: {
+      required: false,
+    },
+    id: {
+      required: false,
+    },
+  },
+  computed: {
+    btnStyle() {
+      return "--btn-color:" + this.color;
+    },
+  },
 };
 </script>
 
 <template>
-  <button>
+  <a :href="href" :style="btnStyle" :id="id">
     <slot></slot>
-  </button>
+  </a>
 </template>
 
-<style scoped>
-button {
+<style lang="scss" scoped>
+a {
   cursor: pointer;
-  font-size: 1rem;
-  font-weight: 500;
-  padding: 0.7rem 2.25rem;
-  border: none;
+  font-size: var(--font-xsmall);
+  font-weight: 600;
+  padding: 1em 2.8em;
+  border: 1px solid var(--btn-color);
+  border-radius: var(--border-radius);
   /* box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); */
-  color: rgb(255, 255, 255);
-  background-color: var(--accent-color2);
-  transition: 200ms ease-in-out;
-}
+  color: var(--btn-color);
+  background-color: transparent;
+  text-align: center;
+  line-height: 20px;
+  transition: all 0.2s ease-in-out;
 
-button:hover {
-}
-
-button:active {
-  transition: none;
-  -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset;
-  -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset;
-  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset;
-}
-@media (min-width: 768px) {
-  button {
-    padding: 0.8rem 3rem;
+  &:hover {
+    color: white;
+    background-color: var(--accent-color1);
   }
 }
 </style>
