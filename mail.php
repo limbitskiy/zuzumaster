@@ -1,6 +1,6 @@
 <?php
 
-$mailTo = 'gagarinbrood@gmail.com';
+$mailTo = 'zuzumaster@yandex.ru';
 
 $subject = 'Письмо с сайта zuzumaster.ru';
 

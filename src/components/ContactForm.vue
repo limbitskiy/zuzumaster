@@ -5,6 +5,7 @@
       <TheInput v-model="phoneNumber" placeholder="Телефон" />
       <TheBtn
         :id="this.btnId"
+        :onclick="this.onclick"
         color="white"
         @click="
           sendData();
@@ -23,7 +24,7 @@
 <script>
 export default {
   name: "ContactForm",
-  props: ["btnId"],
+  props: ["btnId", "onclick"],
   data() {
     return {
       name: "",

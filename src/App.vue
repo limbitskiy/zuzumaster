@@ -1,9 +1,10 @@
 <script>
 import ContactForm from "@/components/ContactForm.vue";
 import TheCalculator from "@/components/TheCalculator.vue";
+import SocialIcons from "@/components/SocialIcons.vue";
 
 export default {
-  components: { ContactForm, TheCalculator },
+  components: { ContactForm, TheCalculator, SocialIcons },
 };
 </script>
 
@@ -14,7 +15,12 @@ export default {
         <div class="header-logo"></div>
         <div class="header-phone">
           <i class="fa fa-mobile" aria-hidden="true"></i>
-          <a href="tel:+7 916 633 56 23">+7 916 633 56 23</a>
+          <a
+            href="tel:+7 916 633 56 23"
+            id="headerPhoneNum"
+            onclick="ym(87449113,'reachGoal','headerPhoneNum')"
+            >+7 916 633 56 23</a
+          >
         </div>
         <div class="header-adress">
           <i class="fa fa-map-marker only-mobile" aria-hidden="true"></i>
@@ -32,7 +38,10 @@ export default {
             zuzumaster.ru<br />
             <span>Фрезерная резка под заказ</span>
           </h1>
-          <ContactForm btnId="headerFormBtn" />
+          <ContactForm
+            btnId="headerFormBtn"
+            onclick="ym(87449113,'reachGoal','headerFormBtn')"
+          />
         </div>
         <div class="hero-image">
           <img class="only-desktop" src="/images/hero-bg.png" alt="" />
@@ -72,10 +81,28 @@ export default {
           </p>
 
           <div class="btn-group">
-            <TheBtn href="#calc" color="#606060">КАЛЬКУЛЯТОР</TheBtn>
-            <TheBtn href="#prices" color="#606060">ПРАЙС</TheBtn>
+            <TheBtn
+              id="gotoCalc"
+              href="#calc"
+              color="#606060"
+              onclick="ym(87449113,'reachGoal','gotoCalc')"
+              >КАЛЬКУЛЯТОР</TheBtn
+            >
+            <TheBtn
+              id="gotoPrice"
+              href="#prices"
+              color="#606060"
+              onclick="ym(87449113,'reachGoal','gotoPrice')"
+              >ПРАЙС</TheBtn
+            >
             <!-- <TheBtn color="#606060">ГАЛЕРЕЯ РАБОТ</TheBtn> -->
-            <TheBtn href="#footer" color="#606060">КОНТАКТЫ</TheBtn>
+            <TheBtn
+              id="gotoContacts"
+              href="#footer"
+              color="#606060"
+              onclick="ym(87449113,'reachGoal','gotoContacts')"
+              >КОНТАКТЫ</TheBtn
+            >
           </div>
         </div>
         <div class="about-image only-desktop">
@@ -167,7 +194,12 @@ export default {
           <li>от 1000пм</li>
         </ul>
 
-        <a href="#prices">Смотреть в виде таблицы</a>
+        <a
+          id="fromCalcToTable"
+          href="#prices"
+          onclick="ym(87449113,'reachGoal','fromCalcToTable')"
+          >Смотреть в виде таблицы</a
+        >
       </div>
 
       <p class="text-center">
@@ -349,17 +381,8 @@ export default {
           Инженерная, технологическая и техническая помощь при реализации
           стартап проектов.
         </p>
-        <ul class="social">
-          <li>
-            <a href="#"><i class="fab fa-whatsapp"></i></a>
-          </li>
-          <li>
-            <a href="#"><i class="fab fa-telegram"></i></a>
-          </li>
-          <li>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-          </li>
-        </ul>
+
+        <SocialIcons />
       </div>
 
       <div class="f-contacts">
@@ -385,18 +408,11 @@ export default {
 
       <div class="f-form">
         <p class="f-title">СВЯЖИТЕСЬ С НАМИ</p>
-        <ContactForm btnId="footerFormBtn" />
-        <ul class="social">
-          <li>
-            <a href="#"><i class="fab fa-whatsapp"></i></a>
-          </li>
-          <li>
-            <a href="#"><i class="fab fa-telegram"></i></a>
-          </li>
-          <li>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-          </li>
-        </ul>
+        <ContactForm
+          btnId="footerFormBtn"
+          onclick="ym(87449113,'reachGoal','footerFormBtn')"
+        />
+        <SocialIcons />
       </div>
     </div>
   </footer>
@@ -777,12 +793,6 @@ footer {
     width: 100%;
     max-height: 200px;
     object-fit: cover;
-  }
-
-  .social {
-    display: flex;
-    gap: 0.8rem;
-    font-size: 1.8rem;
   }
 
   .f-about {

@@ -11,6 +11,9 @@ export default {
     id: {
       required: false,
     },
+    onclick: {
+      required: false,
+    },
   },
   computed: {
     btnStyle() {
@@ -21,7 +24,7 @@ export default {
 </script>
 
 <template>
-  <a :href="href" :style="btnStyle" :id="id">
+  <a :href="href" :style="btnStyle" :id="id" :onclick="onclick">
     <slot></slot>
   </a>
 </template>
