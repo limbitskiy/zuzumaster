@@ -253,5 +253,11 @@ export default createStore({
         }
       },
     ],
+    mobileAddress: false
   },
+  mutations: {
+    setMobileAddress(state, value) {
+      state.mobileAddress = value
+    }
+  }
 });

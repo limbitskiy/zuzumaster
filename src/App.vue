@@ -5,12 +5,25 @@ import SocialIcons from "@/components/SocialIcons.vue";
 
 export default {
   components: { ContactForm, TheCalculator, SocialIcons },
+  computed: {
+    mobileAddress() {
+      return this.$store.state.mobileAddress;
+    },
+  },
 };
 </script>
 
 <template>
   <header>
     <div class="contact-header">
+      <transition name="slide">
+        <div class="mobile-address mobile-only" v-if="this.mobileAddress">
+          <span>
+            Москва, <br />ул.Плеханова, 10а. <br />1,5 км от метро «Шоссе
+            Энтузиастов»<br />zuzumaster@yandex.ru
+          </span>
+        </div>
+      </transition>
       <div class="container">
         <div class="header-logo"></div>
         <div class="header-phone">
@@ -23,10 +36,15 @@ export default {
           >
         </div>
         <div class="header-adress">
-          <i class="fa fa-map-marker only-mobile" aria-hidden="true"></i>
+          <i
+            class="fa fa-map-marker only-mobile showHeaderAddress"
+            :class="{ pressed: this.mobileAddress }"
+            @click="this.$store.commit('setMobileAddress', !this.mobileAddress)"
+            aria-hidden="true"
+          ></i>
           <span class="only-desktop">
             Москва, <br />ул.Плеханова, 10а. <br />1,5 км от метро «Шоссе
-            Энтузиастов»
+            Энтузиастов»<br />zuzumaster@yandex.ru
           </span>
         </div>
       </div>
@@ -399,6 +417,18 @@ export default {
             <i class="fa fa-envelope"></i>
             <p>zuzumaster@yandex.ru</p>
           </div>
+
+          <div class="contact-item">
+            <i class="fa fa-mobile" aria-hidden="true"></i>
+            <a
+              href="tel:+7 916 633 56 23"
+              id="footerPhoneNum"
+              onclick="ym(87449113,'reachGoal','footerPhoneNum')"
+            >
+              +7 916 633 56 23</a
+            >
+          </div>
+
           <div class="contact-item">
             <i class="fa fa-clock"></i>
             <p>Пн-Пт. 10:00 - 18:00</p>
@@ -462,6 +492,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--black-color);
+  padding-top: 70px;
 }
 
 html {
@@ -610,7 +641,11 @@ header {
   .contact-header {
     background-color: var(--hero-bg-lighten);
     color: white;
-    height: 60px;
+    height: 70px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
 
     .container {
       display: grid;
@@ -640,12 +675,38 @@ header {
       font-weight: 500;
       justify-self: right;
       text-align: right;
+      line-height: 130%;
+    }
+  }
+
+  .showHeaderAddress {
+    padding: 0.5rem 0.7rem;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+
+    &.pressed {
+      // color: var(--accent-color1);
+      background-color: #3b4249;
     }
   }
 
   .hero {
     background-color: var(--hero-bg);
     padding-block: 3rem;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .mobile-address {
+    position: absolute;
+    top: 5rem;
+    right: 1rem;
+    background-color: white;
+    color: #222;
+    border-radius: 4px;
+    padding: 0.5rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    text-align: right;
   }
 }
 
@@ -818,9 +879,18 @@ footer {
     align-items: center;
     gap: 0.8rem;
     color: white;
+    margin-top: 0.5rem;
 
     i {
       font-size: 20px;
+    }
+
+    a {
+      color: var(--grey-text);
+
+      &:hover {
+        color: white;
+      }
     }
 
     p {
@@ -833,6 +903,19 @@ footer {
   background-color: var(--hero-bg);
   color: white;
   padding: 1rem;
+}
+
+// =====ANIMATIONS=====
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.2s ease;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateX(150%);
+  opacity: 0;
 }
 
 // =====MEDIA=====
